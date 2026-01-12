@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\WaitlistJoined;
 use App\Models\WaitlistEntry;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class WaitlistController extends Controller
@@ -47,6 +49,9 @@ class WaitlistController extends Controller
                 'email' => $request->email,
                 'monthly_revenue_range' => $request->monthly_revenue_range,
             ]);
+
+            // Send confirmation email to the user
+            Mail::to($entry->email)->send(new WaitlistJoined($entry));
 
             return response()->json([
                 'success' => true,

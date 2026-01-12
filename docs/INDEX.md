@@ -63,6 +63,14 @@ Building user interfaces:
 
 ---
 
+## 🚀 Deployment
+
+| Document | Description | Level |
+|----------|-------------|-------|
+| [Deploying to DigitalOcean Droplet](./deployment-laravel-droplet.md) | Step-by-step guide to go live | Intermediate |
+
+---
+
 ## 🧪 Testing
 
 Ensuring quality:
