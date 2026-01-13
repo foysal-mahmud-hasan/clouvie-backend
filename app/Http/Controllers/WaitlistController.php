@@ -50,8 +50,17 @@ class WaitlistController extends Controller
                 'monthly_revenue_range' => $request->monthly_revenue_range,
             ]);
 
-            // Send confirmation email to the user
-            Mail::to($entry->email)->send(new WaitlistJoined($entry));
+            // Try to send confirmation email to the user, but don't fail the request if email sending breaks
+            try {
+                Mail::to($entry->email)->send(new WaitlistJoined($entry));
+            } catch (\Throwable $mailException) {
+                // You can later inspect logs on the server if emails fail
+                \Log::error('Failed to send waitlist confirmation email', [
+                    'waitlist_entry_id' => $entry->id,
+                    'email' => $entry->email,
+                    'exception' => $mailException->getMessage(),
+                ]);
+            }
 
             return response()->json([
                 'success' => true,
