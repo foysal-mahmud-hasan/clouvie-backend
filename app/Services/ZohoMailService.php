@@ -42,7 +42,6 @@ class ZohoMailService
             ])
             ->post($endpoint, [
                 'fromAddress' => $from,
-                'displayName' => 'Asif from Clouvie',
                 'toAddress' => $entry->email,
                 'subject' => $subject,
                 'content' => $htmlContent,
