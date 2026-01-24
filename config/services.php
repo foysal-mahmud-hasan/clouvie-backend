@@ -22,6 +22,14 @@ return [
         'key' => env('RESEND_API_KEY'),
     ],
 
+    'zoho_mail' => [
+        'account_id' => env('ZOHO_MAIL_ACCOUNT_ID'),
+        'from' => env('ZOHO_MAIL_FROM_ADDRESS', env('MAIL_FROM_ADDRESS')),
+        'token' => env('ZOHO_MAIL_TOKEN'),
+        'base_url' => env('ZOHO_MAIL_BASE_URL', 'https://mail.zoho.com/api'),
+        'timeout' => env('ZOHO_MAIL_TIMEOUT', 5),
+    ],
+
     'ses' => [
         'key' => env('AWS_ACCESS_KEY_ID'),
         'secret' => env('AWS_SECRET_ACCESS_KEY'),

@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\WaitlistJoined;
 use App\Models\WaitlistEntry;
+use App\Services\ZohoMailService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class WaitlistController extends Controller
 {
+    public function __construct(private ZohoMailService $zohoMail)
+    {
+    }
+
     /**
      * Show all waitlist entries in an admin view.
      *
@@ -50,16 +53,12 @@ class WaitlistController extends Controller
                 'monthly_revenue_range' => $request->monthly_revenue_range,
             ]);
 
-            // Try to send confirmation email to the user, but don't fail the request if email sending breaks
+            // Send confirmation email via Zoho Mail HTTP API, but never
+            // let mail issues break or significantly delay the response.
             try {
-                Mail::to($entry->email)->send(new WaitlistJoined($entry));
+                $this->zohoMail->sendWaitlistConfirmation($entry);
             } catch (\Throwable $mailException) {
-                // You can later inspect logs on the server if emails fail
-                \Log::error('Failed to send waitlist confirmation email', [
-                    'waitlist_entry_id' => $entry->id,
-                    'email' => $entry->email,
-                    'exception' => $mailException->getMessage(),
-                ]);
+                // Silently ignore mail failures here; they are logged inside the service.
             }
 
             return response()->json([
