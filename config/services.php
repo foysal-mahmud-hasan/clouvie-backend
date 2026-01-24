@@ -24,8 +24,11 @@ return [
 
     'zoho_mail' => [
         'account_id' => env('ZOHO_MAIL_ACCOUNT_ID'),
+        'client_id' => env('ZOHO_MAIL_CLIENT_ID'),
+        'client_secret' => env('ZOHO_MAIL_CLIENT_SECRET'),
         'from' => env('ZOHO_MAIL_FROM_ADDRESS', env('MAIL_FROM_ADDRESS')),
         'token' => env('ZOHO_MAIL_TOKEN'),
+        'refresh_token' => env('ZOHO_MAIL_REFRESH_TOKEN'),
         'base_url' => env('ZOHO_MAIL_BASE_URL', 'https://mail.zoho.com/api'),
         'timeout' => env('ZOHO_MAIL_TIMEOUT', 5),
     ],
