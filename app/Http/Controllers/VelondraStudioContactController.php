@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Validator;
 
 class VelondraStudioContactController extends Controller
 {
-    private const NOTIFICATION_RECIPIENT = 'asif@clouvie.com';
+    private const NOTIFICATION_RECIPIENT = 'studio@velondra.com';
 
     /**
      * Admin view: list every submission, latest first.
