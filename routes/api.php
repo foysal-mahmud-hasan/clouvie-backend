@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WaitlistController;
+use App\Http\Controllers\VelondraStudioContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +44,24 @@ Route::post('/register', [UserController::class, 'register']);
  * - monthly_revenue_range (string, optional)
  */
 Route::post('/waitlist', [WaitlistController::class, 'store']);
+
+/*
+ * POST /api/velondra-studio/contact
+ *
+ * Contact form for studio.velondra.com.
+ *
+ * Expected JSON body:
+ * - name (string, required)
+ * - email (string, required, valid email)
+ * - company (string, optional)
+ * - budget (string, optional)
+ * - services (array of strings, optional)
+ * - message (string, required, max 10000 chars)
+ *
+ * On success: stores in velondra_studio_submissions, emails asif@clouvie.com,
+ * sends auto-reply to the submitter, returns 201 JSON.
+ */
+Route::post('/velondra-studio/contact', [VelondraStudioContactController::class, 'store']);
 
 /*
  * GET /api/users
