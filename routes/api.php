@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WaitlistController;
 use App\Http\Controllers\VelondraStudioContactController;
+use App\Http\Controllers\AntariousDemoRequestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,6 +63,26 @@ Route::post('/waitlist', [WaitlistController::class, 'store']);
  * sends auto-reply to the submitter, returns 201 JSON.
  */
 Route::post('/velondra-studio/contact', [VelondraStudioContactController::class, 'store']);
+
+/*
+ * POST /api/antarious/demo
+ *
+ * Demo-request form for antarious.com (help-centre + site-wide "Request a demo" CTAs).
+ *
+ * Expected JSON body:
+ * - name (string, required)
+ * - email (string, required, valid email)
+ * - company (string, required)
+ * - role (string, optional)
+ * - team_size (string, optional, one of: 1-10, 11-50, 51-200, 200+)
+ * - use_case (string, optional, max 4000 chars)
+ *
+ * On success: stores in antarious_demo_requests, sends notification to
+ * sales@antarious.com and an auto-reply to the submitter via the dedicated
+ * RESEND_ANTARIOUS_API_KEY (separate Resend account from the default key),
+ * and returns 201 JSON.
+ */
+Route::post('/antarious/demo', [AntariousDemoRequestController::class, 'store']);
 
 /*
  * GET /api/users

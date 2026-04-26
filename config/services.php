@@ -22,6 +22,10 @@ return [
         'key' => env('RESEND_API_KEY'),
     ],
 
+    'resend_antarious' => [
+        'api_key' => env('RESEND_ANTARIOUS_API_KEY'),
+    ],
+
     'zoho_mail' => [
         'account_id' => env('ZOHO_MAIL_ACCOUNT_ID'),
         'client_id' => env('ZOHO_MAIL_CLIENT_ID'),

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WaitlistController;
 use App\Http\Controllers\VelondraStudioContactController;
+use App\Http\Controllers\AntariousDemoRequestController;
 
 /*
  * BEGINNER'S GUIDE TO WEB ROUTES:
@@ -27,3 +28,7 @@ Route::get('/clouvie/waitlist', [WaitlistController::class, 'index']);
 // Admin view for Velondra Studio contact submissions
 // https://backend.clouvie.com/velondra-studio/submissions
 Route::get('/velondra-studio/submissions', [VelondraStudioContactController::class, 'index']);
+
+// Admin view for Antarious demo requests
+// https://backend.clouvie.com/antarious/demo-requests
+Route::get('/antarious/demo-requests', [AntariousDemoRequestController::class, 'index']);
