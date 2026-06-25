@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\WaitlistController;
 use App\Http\Controllers\VelondraStudioContactController;
 use App\Http\Controllers\AntariousDemoRequestController;
+use App\Http\Controllers\AdeospaceContactController;
 
 /*
  * BEGINNER'S GUIDE TO WEB ROUTES:
@@ -32,3 +33,7 @@ Route::get('/velondra-studio/submissions', [VelondraStudioContactController::cla
 // Admin view for Antarious demo requests
 // https://backend.clouvie.com/antarious/demo-requests
 Route::get('/antarious/demo-requests', [AntariousDemoRequestController::class, 'index']);
+
+// Admin view for AdeoSpace contact submissions
+// https://backend.clouvie.com/adeospace/submissions
+Route::get('/adeospace/submissions', [AdeospaceContactController::class, 'index']);

@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\WaitlistController;
 use App\Http\Controllers\VelondraStudioContactController;
 use App\Http\Controllers\AntariousDemoRequestController;
+use App\Http\Controllers\AdeospaceContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -83,6 +84,24 @@ Route::post('/velondra-studio/contact', [VelondraStudioContactController::class,
  * and returns 201 JSON.
  */
 Route::post('/antarious/demo', [AntariousDemoRequestController::class, 'store']);
+
+/*
+ * POST /api/adeospace/contact
+ *
+ * "Start a Conversation" contact form for adeospace.co.uk.
+ *
+ * Expected JSON body:
+ * - name (string, required)
+ * - email (string, required, valid email)
+ * - organisation (string, optional)
+ * - sector (string, optional)
+ * - message (string, required, max 10000 chars)
+ *
+ * On success: stores in adeospace_submissions, emails hello@adeospace.co.uk
+ * (sent from the verified velondra.com domain as "AdeoSpace Team", Reply-To =
+ * submitter), sends an auto-reply to the submitter, and returns 201 JSON.
+ */
+Route::post('/adeospace/contact', [AdeospaceContactController::class, 'store']);
 
 /*
  * GET /api/users
